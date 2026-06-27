@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using font awesome for icons, found this on google -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="main-container">
+
+        <!-- App Title -->
+        <h1 class="app-title">
+            <i class="fas fa-cloud-sun"></i> Weather App
+        </h1>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name..."
+                autocomplete="off"
+            />
+            <button id="searchBtn">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+
+        <!-- Loading spinner - hidden by default -->
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <p>Loading weather data...</p>
+        </div>
+
+        <!-- Error message box - hidden by default -->
+        <div class="error-box" id="errorBox">
+            <i class="fas fa-exclamation-circle"></i>
+            <p id="errorText">City not found! Please try again.</p>
+        </div>
+
+        <!-- Weather Info Card - hidden until we get data -->
+        <div class="weather-card" id="weatherCard">
+
+            <!-- City and Country -->
+            <div class="city-info">
+                <h2 id="cityName">--</h2>
+                <p id="countryName">--</p>
+            </div>
+
+            <!-- Weather Icon from OpenWeatherMap -->
+            <div class="weather-icon-box">
+                <img id="weatherIcon" src="" alt="weather icon" />
+                <p id="weatherDesc">--</p>
+            </div>
+
+            <!-- Main Temperature -->
+            <div class="temperature-box">
+                <h1 id="tempValue">--</h1>
+                <span>°C</span>
+            </div>
+
+            <!-- Extra Details: Humidity and Wind -->
+            <div class="extra-info">
+                <div class="info-item">
+                    <i class="fas fa-tint"></i>
+                    <p id="humidity">--%</p>
+                    <small>Humidity</small>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-wind"></i>
+                    <p id="windSpeed">-- km/h</p>
+                    <small>Wind Speed</small>
+                </div>
+            </div>
+
+            <!-- Last updated time -->
+            <p class="last-updated" id="lastUpdated"></p>
+
+        </div>
+
+        <!-- Small footer -->
+        <p class="footer-text">Made with ❤️ using OpenWeatherMap API</p>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

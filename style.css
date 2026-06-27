@@ -1,0 +1,318 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body background - I wanted a nice gradient */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Main container that holds everything */
+.main-container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+/* App title at the top */
+.app-title {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    /* Adding a little bounce animation on load */
+    animation: fadeDown 0.6s ease;
+}
+
+.app-title i {
+    color: #f9d71c;
+}
+
+/* Search bar wrapper */
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    animation: fadeDown 0.7s ease;
+}
+
+/* Text input styling */
+.search-box input {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    /* smooth transition when focused */
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+    transform: scale(1.01);
+}
+
+/* Search button */
+.search-box button {
+    padding: 12px 18px;
+    background: #f9d71c;
+    color: #1e3c72;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Button hover effect */
+.search-box button:hover {
+    background: #ffec5c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.search-box button:active {
+    transform: translateY(0);
+}
+
+/* Loading spinner section */
+.loader {
+    color: white;
+    margin: 20px 0;
+    display: none; /* hidden by default, shown via JS */
+}
+
+/* CSS spinner - I learned this from a tutorial */
+.spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 10px auto;
+}
+
+/* Error box styling */
+.error-box {
+    background: rgba(255, 80, 80, 0.85);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    display: none; /* hidden by default */
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    animation: shakeAnim 0.4s ease;
+}
+
+.error-box i {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+/* Main weather card */
+.weather-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 30px 25px;
+    color: white;
+    display: none; /* hidden until we get data */
+    animation: fadeUp 0.5s ease;
+}
+
+/* City name and country */
+.city-info h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.city-info p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 3px;
+}
+
+/* Weather icon section */
+.weather-icon-box {
+    margin: 15px 0 5px;
+}
+
+.weather-icon-box img {
+    width: 90px;
+    height: 90px;
+    /* little float animation on the icon */
+    animation: floatIcon 3s ease-in-out infinite;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+}
+
+.weather-icon-box p {
+    font-size: 1rem;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 5px;
+}
+
+/* Big temperature number */
+.temperature-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 10px 0 20px;
+}
+
+.temperature-box h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.temperature-box span {
+    font-size: 1.5rem;
+    margin-top: 8px;
+    opacity: 0.85;
+}
+
+/* Humidity and wind speed boxes */
+.extra-info {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 15px 10px;
+    gap: 10px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    flex: 1;
+    /* Hover effect on the info boxes */
+    transition: transform 0.2s ease;
+}
+
+.info-item:hover {
+    transform: scale(1.05);
+}
+
+.info-item i {
+    font-size: 1.4rem;
+    color: #f9d71c;
+}
+
+.info-item p {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.info-item small {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Last updated time text */
+.last-updated {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 15px;
+}
+
+/* Footer text at the bottom */
+.footer-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    margin-top: 20px;
+}
+
+/* ================================
+   CSS Animations
+   ================================ */
+
+/* Spinning animation for loader */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Card floating up */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Title sliding down */
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Weather icon floating */
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+}
+
+/* Error shake */
+@keyframes shakeAnim {
+    0%, 100% { transform: translateX(0); }
+    25%       { transform: translateX(-8px); }
+    75%       { transform: translateX(8px); }
+}
+
+/* ================================
+   Responsive for mobile screens
+   ================================ */
+@media (max-width: 480px) {
+
+    .app-title {
+        font-size: 1.6rem;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .search-box button {
+        width: 100%;
+    }
+
+    .temperature-box h1 {
+        font-size: 3.2rem;
+    }
+
+    .weather-card {
+        padding: 22px 18px;
+    }
+}
